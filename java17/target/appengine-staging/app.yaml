@@ -1,0 +1,22 @@
+runtime: java17
+inbound_services:
+- warmup
+app_engine_apis: True
+auto_id_policy: default
+handlers:
+- url: /
+  script: unused
+  login: optional
+  secure: optional
+- url: /.*/
+  script: unused
+  login: optional
+  secure: optional
+- url: /_ah/.*
+  script: unused
+  login: optional
+  secure: optional
+- url: /userapi
+  script: unused
+  login: optional
+  secure: optional
