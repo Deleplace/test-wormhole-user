@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"os"
 
 	"google.golang.org/appengine/v2"
 	"google.golang.org/appengine/v2/user"
@@ -54,13 +53,19 @@ func main() {
 		}
 	})
 
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "8080"
-		log.Printf("Defaulting to port %s", port)
-	}
+	// According to https://b.corp.google.com/issues/270036113#comment31,
+	// we should run this...
+	appengine.Main()
 
-	log.Printf("Listening on port %s", port)
-	err := http.ListenAndServe(fmt.Sprintf(":%s", port), nil)
-	log.Fatal(err)
+	// ... and NOT this:
+
+	// port := os.Getenv("PORT")
+	// if port == "" {
+	// 	port = "8080"
+	// 	log.Printf("Defaulting to port %s", port)
+	// }
+
+	// log.Printf("Listening on port %s", port)
+	// err := http.ListenAndServe(fmt.Sprintf(":%s", port), nil)
+	// log.Fatal(err)
 }
